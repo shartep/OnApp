@@ -24,7 +24,15 @@ RSpec.describe IssuesController, type: :controller do
   # Issue. As you add validations to Issue, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+        subject: 'Subject Test Issue',
+        body: 'Valid body text for testing',
+        department: {id: 1},
+        user: {
+            email: 'user@test.com',
+            name: 'Name of Test User',
+        }
+    }
   }
 
   let(:invalid_attributes) {
