@@ -24,11 +24,11 @@ RSpec.describe DepartmentsController, type: :controller do
   # Department. As you add validations to Department, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    build(:department).attributes
+    FactoryGirl.attributes_for :department
   }
 
   let(:invalid_attributes) {
-    build(:invalid_department).attributes
+    FactoryGirl.attributes_for :department, name: Array.new(5, 'Name longer then 100 chars').join(', ')
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,17 @@ RSpec.describe DepartmentsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        build(:regular_department).attributes
       }
 
       it "updates the requested department" do
         department = Department.create! valid_attributes
         put :update, {:id => department.to_param, :department => new_attributes}, valid_session
         department.reload
-        skip("Add assertions for updated state")
+
+        local_attrs = new_attributes.keep_if { |k, v| v.present? }
+        db_attrs = department.attributes.keep_if { |k, v| local_attrs.keys.include? k }
+        expect(db_attrs).to eq(local_attrs)
       end
 
       it "assigns the requested department as @department" do
