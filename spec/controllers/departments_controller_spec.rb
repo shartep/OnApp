@@ -24,11 +24,11 @@ RSpec.describe DepartmentsController, type: :controller do
   # Department. As you add validations to Department, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    build(:department).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    build(:invalid_department).attributes
   }
 
   # This should return the minimal set of values that should be in the session
