@@ -1,19 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe "departments/index", type: :view do
+RSpec.describe 'departments/index', type: :view do
   before(:each) do
     assign(:departments, [
-      Department.create!(
-        :name => "Name"
-      ),
-      Department.create!(
-        :name => "Name"
-      )
+      create(:department),
+      create(:department)
     ])
   end
 
-  it "renders a list of departments" do
+  it 'renders a list of departments' do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select 'tr>td', text: 'Main department'.to_s, count: 2
   end
 end
