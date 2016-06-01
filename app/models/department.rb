@@ -1,5 +1,5 @@
 class Department < ActiveRecord::Base
   has_many :issues
 
-  validates :name, presence: true, length: 1..100
+  validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
 end
