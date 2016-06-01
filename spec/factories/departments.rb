@@ -1,11 +1,7 @@
 FactoryGirl.define do
 
   factory :department do
-    name 'Main department'
-
-    factory :regular_department do
-      name 'Regular department'
-    end
+    sequence(:name) { |n| "#{n.ordinalize} department" }
   end
 
 end
