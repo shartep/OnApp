@@ -14,16 +14,12 @@ RSpec.describe Department, type: :model do
     end
   end
 
-  describe 'validation' do
-    let(:department) { build(:department) }
+  describe 'validations' do
+    subject { FactoryGirl.build(:department) }
 
-    it 'require name' do
-      expect(department).to validate_presence_of(:name)
-    end
-
-    it 'name length' do
-      expect(department).to validate_length_of(:name).is_at_most(100)
-    end
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_length_of(:name).is_at_most(100) }
   end
 
   describe 'associations' do
