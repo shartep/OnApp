@@ -4,8 +4,11 @@
   %b Email:
   = @user.email
 %p
-  %b Name:
-  = @user.name
+  %b First name:
+  = @user.first_name
+%p
+  %b Last name:
+  = @user.last_name
 
 = link_to 'Edit', edit_user_path(@user)
 \|

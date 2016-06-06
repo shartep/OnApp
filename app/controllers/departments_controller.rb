@@ -15,7 +15,6 @@ class DepartmentsController < ApplicationController
   end
 
   def edit
-    respond_with @department
   end
 
   def create
