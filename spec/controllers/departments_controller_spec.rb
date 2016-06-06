@@ -4,8 +4,8 @@ RSpec.describe DepartmentsController, type: :controller do
 
   let(:long_text) { Array.new(5, 'Name longer then 100 chars').join(', ') }
   let(:department) { create :department }
-  let(:valid_attributes) { FactoryGirl.attributes_for :department }
-  let(:invalid_attributes) { FactoryGirl.attributes_for :department, name: long_text }
+  let(:valid_attributes) { attributes_for :department }
+  let(:invalid_attributes) { attributes_for :department, name: long_text }
   let(:valid_session) { {} }
 
   describe 'GET #index' do
@@ -73,7 +73,7 @@ RSpec.describe DepartmentsController, type: :controller do
 
       it 'redirects to the created department' do
         post :create, { department: valid_attributes }, valid_session
-        expect(response).to redirect_to(assigns(:department))
+        expect(response).to redirect_to(Department.last)
       end
     end
 
@@ -98,7 +98,7 @@ RSpec.describe DepartmentsController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) { FactoryGirl.attributes_for :department, name: 'Updated department' }
+      let(:new_attributes) { attributes_for :department, name: 'Updated department' }
 
       it 'updates the requested department in database' do
         put :update, { id: department, department: new_attributes}, valid_session
@@ -138,8 +138,10 @@ RSpec.describe DepartmentsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested department' do
-      delete :destroy, { id: department }, valid_session
-      expect Department.exists?(department.id)
+      dep_id = department.id
+      expect {
+        delete :destroy, { id: dep_id }, valid_session
+      }.to change(Department, :count).by(-1)
     end
 
     it 'redirects to the departments#index' do
