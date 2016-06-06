@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'issues#new'
 
   resources :departments
+  resources :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

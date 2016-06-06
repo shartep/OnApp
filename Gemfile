@@ -12,6 +12,7 @@ gem 'haml'
 gem 'haml-rails'
 
 gem 'responders'
+gem 'validates_email_format_of'
 
 gem 'jquery-rails'
 gem 'turbolinks'
