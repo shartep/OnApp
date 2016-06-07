@@ -15,7 +15,7 @@ RSpec.describe Department, type: :model do
   end
 
   describe 'validations' do
-    subject { FactoryGirl.build(:department) }
+    subject { build(:department) }
 
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
